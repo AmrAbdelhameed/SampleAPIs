@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<MainGridItem> mGridData;
     private MainGridViewAdapter mGridAdapter;
     private ProgressDialog dialog;
+    DBHelper helper = new DBHelper();
 
     @Override
     public void onResume() {
@@ -61,11 +64,14 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                String idd = mGridAdapter.getItem(position).getIDD();
                 String nam = mGridAdapter.getItem(position).getName();
-                String im = mGridAdapter.getItem(position).getImage();
+                String numb = mGridAdapter.getItem(position).getNumber();
+
                 Bundle b = new Bundle();
-                b.putString("myname", nam);
-                b.putString("myimage", im);
+                b.putString("ab", idd);
+                b.putString("abab", nam);
+                b.putString("ababab",numb);
                 intent.putExtras(b);
                 startActivity(intent);
             }
@@ -106,14 +112,14 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             try {
                 JSONObject response = new JSONObject(result);
-                JSONArray posts = response.optJSONArray("actors");
+                JSONArray posts = response.optJSONArray("results");
                 MainGridItem item;
                 for (int i = 0; i < posts.length(); i++) {
                     JSONObject post = posts.optJSONObject(i);
-                    String title = post.optString("name");
                     item = new MainGridItem();
-                    item.setName(title);
-                    item.setImage(post.getString("image"));
+                    item.setIDD(post.optString("id"));
+                    item.setName(post.getString("name"));
+                    item.setNumber(post.getString("number"));
 
                     mGridData.add(item);
                 }
@@ -127,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... strings) {
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-            final String baseURL = "http://microblogging.wingnity.com/JSONParsingTutorial/jsonActors";
+            final String baseURL = helper.ShowAll();
             final String api_key = "api_key";
 
             Uri built = Uri.parse(baseURL).buildUpon().build();
@@ -204,5 +210,24 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int a = item.getItemId();
+        if (a == R.id.item1) {
+            Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+            startActivity(intent);
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

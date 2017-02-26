@@ -6,16 +6,8 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
-
-    TextView titleView;
-    String aa;
-    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +18,11 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent in = getIntent();
         Bundle b = in.getExtras();
-        String stitle = b.getString("myname");
-        String ss = b.getString("myimage");
+        String a = b.getString("ab");
+        String aa = b.getString("abab");
+        String aaa = b.getString("ababab");
 
-        setTitle(stitle);
-
-        titleView = (TextView) findViewById(R.id.tvMovie);
-        imageView = (ImageView) findViewById(R.id.ivIcon);
-
-        titleView.setText(stitle);
-        Picasso.with(DetailActivity.this).load(ss).into(imageView);
+        setTitle(a+" "+aa+" "+aaa);
 
     }
 

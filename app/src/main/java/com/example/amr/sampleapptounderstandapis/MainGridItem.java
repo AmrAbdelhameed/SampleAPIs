@@ -1,22 +1,16 @@
 package com.example.amr.sampleapptounderstandapis;
 
+/**
+ * Created by Amr on 26/02/2017.
+ */
 public class MainGridItem {
-
-    private String image;
-    private String name;
-
-    public MainGridItem() {
-        super();
+    public String getIDD() {
+        return IDD;
     }
 
-    public String getImage() {
-        return image;
+    public void setIDD(String IDD) {
+        this.IDD = IDD;
     }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
 
     public String getName() {
         return name;
@@ -26,4 +20,19 @@ public class MainGridItem {
         this.name = name;
     }
 
+    private String IDD;
+    private String name;
+    private String number;
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public MainGridItem() {
+        super();
+    }
 }

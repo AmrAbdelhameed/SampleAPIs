@@ -44,8 +44,7 @@ public class MainGridViewAdapter extends ArrayAdapter<MainGridItem> {
         }
 
         MainGridItem item = mGridData.get(position);
-        holder.text.setText(item.getName());
-        //Picasso.with(mContext).load(item.getImage()).placeholder(R.drawable.refresh).into(holder.Image1);
+        holder.text.setText(item.getIDD()+" "+item.getName()+" "+item.getNumber());
         return row;
     }
 
