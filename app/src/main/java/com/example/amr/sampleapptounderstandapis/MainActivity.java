@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<MainGridItem> mGridData;
     private MainGridViewAdapter mGridAdapter;
     private ProgressDialog dialog;
-    DBHelper helper = new DBHelper();
 
     @Override
     public void onResume() {
@@ -67,11 +66,15 @@ public class MainActivity extends AppCompatActivity {
                 String idd = mGridAdapter.getItem(position).getIDD();
                 String nam = mGridAdapter.getItem(position).getName();
                 String numb = mGridAdapter.getItem(position).getNumber();
+                String age = mGridAdapter.getItem(position).getAge();
 
                 Bundle b = new Bundle();
+
                 b.putString("ab", idd);
                 b.putString("abab", nam);
                 b.putString("ababab",numb);
+                b.putString("abababab",age);
+
                 intent.putExtras(b);
                 startActivity(intent);
             }
@@ -118,8 +121,9 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject post = posts.optJSONObject(i);
                     item = new MainGridItem();
                     item.setIDD(post.optString("id"));
-                    item.setName(post.getString("name"));
-                    item.setNumber(post.getString("number"));
+                    item.setName(post.getString("firstname"));
+                    item.setNumber(post.getString("lastname"));
+                    item.setAge(post.getString("age"));
 
                     mGridData.add(item);
                 }
@@ -133,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... strings) {
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-            final String baseURL = helper.ShowAll();
+            final String baseURL = "http://192.168.1.107/phpinandroid/showStudents.php";
             final String api_key = "api_key";
 
             Uri built = Uri.parse(baseURL).buildUpon().build();
@@ -222,8 +226,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int a = item.getItemId();
         if (a == R.id.item1) {
-            Intent intent = new Intent(getApplicationContext(), AddActivity.class);
-            startActivity(intent);
 
             return true;
         }

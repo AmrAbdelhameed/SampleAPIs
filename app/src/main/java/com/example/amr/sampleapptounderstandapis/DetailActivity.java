@@ -2,7 +2,6 @@ package com.example.amr.sampleapptounderstandapis;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,8 +20,9 @@ public class DetailActivity extends AppCompatActivity {
         String a = b.getString("ab");
         String aa = b.getString("abab");
         String aaa = b.getString("ababab");
+        String aaaa = b.getString("abababab");
 
-        setTitle(a+" "+aa+" "+aaa);
+        setTitle(a+" "+aa+" "+aaa+" "+aaaa);
 
     }
 
@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            NavUtils.navigateUpFromSameTask(this);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

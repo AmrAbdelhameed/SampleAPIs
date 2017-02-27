@@ -3,7 +3,18 @@ package com.example.amr.sampleapptounderstandapis;
 /**
  * Created by Amr on 26/02/2017.
  */
+
 public class MainGridItem {
+
+    private String IDD;
+    private String name;
+    private String number;
+    private String age;
+
+    public MainGridItem() {
+        super();
+    }
+
     public String getIDD() {
         return IDD;
     }
@@ -20,10 +31,6 @@ public class MainGridItem {
         this.name = name;
     }
 
-    private String IDD;
-    private String name;
-    private String number;
-
     public String getNumber() {
         return number;
     }
@@ -32,7 +39,11 @@ public class MainGridItem {
         this.number = number;
     }
 
-    public MainGridItem() {
-        super();
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 }

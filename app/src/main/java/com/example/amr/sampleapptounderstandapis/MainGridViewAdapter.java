@@ -44,7 +44,7 @@ public class MainGridViewAdapter extends ArrayAdapter<MainGridItem> {
         }
 
         MainGridItem item = mGridData.get(position);
-        holder.text.setText(item.getIDD()+" "+item.getName()+" "+item.getNumber());
+        holder.text.setText(item.getName());
         return row;
     }
 
