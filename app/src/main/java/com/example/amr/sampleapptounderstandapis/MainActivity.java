@@ -48,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences_name", Context.MODE_PRIVATE);
+        String choose = sharedPreferences.getString("choose", "home");
+
+        setTitle(choose);
+
         dialog = new ProgressDialog(MainActivity.this);
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
@@ -69,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
                 Bundle b = new Bundle();
 
-                b.putString("ab", title);
-                b.putString("abab", imageurl);
-                b.putString("ababab", published_date);
+                b.putString("title", title);
+                b.putString("imageurl", imageurl);
+                b.putString("published_date", published_date);
 
                 intent.putExtras(b);
                 startActivity(intent);
@@ -87,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
 
     public class MoviesAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
-        String appKey = "";
         String movieJson;
 
         private final String LOG_TAG = MoviesAsyncTask.class.getSimpleName();
@@ -131,8 +135,6 @@ public class MainActivity extends AppCompatActivity {
 
             SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences_name", Context.MODE_PRIVATE);
             String choose = sharedPreferences.getString("choose", "home");
-
-            setTitle(choose);
 
             String baseURL = "http://api.nytimes.com/svc/topstories/v2/" + choose + ".json?api_key=b8e44f592a524d3db24fcb3636f874e5";
 

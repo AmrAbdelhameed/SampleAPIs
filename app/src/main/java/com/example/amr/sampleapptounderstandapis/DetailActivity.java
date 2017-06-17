@@ -3,6 +3,7 @@ package com.example.amr.sampleapptounderstandapis;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -19,20 +20,23 @@ public class DetailActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        TextView title = (TextView) findViewById(R.id.title_);
+        TextView tit = (TextView) findViewById(R.id.title_);
         TextView date = (TextView) findViewById(R.id.date_);
         ImageView img = (ImageView) findViewById(R.id.image_);
 
         Intent in = getIntent();
         Bundle b = in.getExtras();
-        String a = b.getString("ab");
-        String aa = b.getString("abab");
-        String aaa = b.getString("ababab");
 
-        title.setText(a);
-        setTitle(a);
-        date.setText(aa);
-        Picasso.with(DetailActivity.this).load(aaa).into(img);
+        String title = b.getString("title");
+        String imageurl = b.getString("imageurl");
+        String published_date = b.getString("published_date");
+
+        tit.setText(title);
+        setTitle(title);
+
+        date.setText(published_date);
+
+        Picasso.with(DetailActivity.this).load(imageurl).into(img);
 
     }
 
@@ -51,6 +55,15 @@ public class DetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public boolean onKeyDown(int keycode, KeyEvent event) {
+        if (keycode == KeyEvent.KEYCODE_BACK) {
+
+            finish();
+            overridePendingTransition(0, 0);
+
+        }
+        return super.onKeyDown(keycode, event);
     }
 }
 

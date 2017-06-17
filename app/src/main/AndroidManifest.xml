@@ -20,11 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailActivity">
-
-            <!-- <meta-data -->
-            <!-- android:name="android.support.PARENT_ACTIVITY" -->
-            <!-- android:value="com.example.amr.sampleapptounderstandapis.MainActivity" /> -->
-
         </activity>
     </application>
 
