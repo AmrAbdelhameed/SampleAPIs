@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -37,18 +40,24 @@ public class MainGridViewAdapter extends ArrayAdapter<MainGridItem> {
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new ViewHolder();
-            holder.text = (TextView) row.findViewById(R.id.textView);
+            holder.text = (TextView) row.findViewById(R.id.title);
+            holder.text2 = (TextView) row.findViewById(R.id.published);
+            holder.imageView = (ImageView) row.findViewById(R.id.imagevi);
             row.setTag(holder);
         } else {
             holder = (ViewHolder) row.getTag();
         }
 
         MainGridItem item = mGridData.get(position);
-        holder.text.setText(item.getName());
+        holder.text.setText(item.getTitle());
+        holder.text2.setText(item.getPublished_date());
+        Picasso.with(mContext).load(item.getImageURL()).into(holder.imageView);
+
         return row;
     }
 
     static class ViewHolder {
-        TextView text;
+        TextView text , text2;
+        ImageView imageView;
     }
 }

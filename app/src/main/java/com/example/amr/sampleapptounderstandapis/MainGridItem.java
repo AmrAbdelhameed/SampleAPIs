@@ -1,49 +1,42 @@
 package com.example.amr.sampleapptounderstandapis;
 
-/**
- * Created by Amr on 26/02/2017.
- */
-
 public class MainGridItem {
 
-    private String IDD;
-    private String name;
-    private String number;
-    private String age;
+    private String title;
+    private String imageURL;
+    private String Published_date;
 
     public MainGridItem() {
         super();
     }
 
-    public String getIDD() {
-        return IDD;
+    public MainGridItem(String title, String imageURL, String published_date) {
+        this.title = title;
+        this.imageURL = imageURL;
+        Published_date = published_date;
     }
 
-    public void setIDD(String IDD) {
-        this.IDD = IDD;
+    public String getTitle() {
+        return title;
     }
 
-    public String getName() {
-        return name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public String getNumber() {
-        return number;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public String getPublished_date() {
+        return Published_date;
     }
 
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
+    public void setPublished_date(String published_date) {
+        Published_date = published_date;
     }
 }

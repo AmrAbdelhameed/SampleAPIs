@@ -1,0 +1,85 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.amr.ystechnicaltask.ShowTopStories">
+
+    <item
+        android:id="@+id/home1"
+        android:title="Home" />
+    <item
+        android:id="@+id/arts"
+        android:title="Arts" />
+    <item
+        android:id="@+id/automobiles"
+        android:title="Automobiles" />
+    <item
+        android:id="@+id/books"
+        android:title="Books" />
+    <item
+        android:id="@+id/business"
+        android:title="Business" />
+    <item
+        android:id="@+id/fashion"
+        android:title="Fashion" />
+    <item
+        android:id="@+id/food"
+        android:title="Food" />
+    <item
+        android:id="@+id/health"
+        android:title="Health" />
+    <item
+        android:id="@+id/insider"
+        android:title="Insider" />
+    <item
+        android:id="@+id/magazine"
+        android:title="Magazine" />
+    <item
+        android:id="@+id/movies"
+        android:title="Movies" />
+    <item
+        android:id="@+id/national"
+        android:title="national" />
+    <item
+        android:id="@+id/nyregion"
+        android:title="Nyregion" />
+    <item
+        android:id="@+id/obituaries"
+        android:title="Obituaries" />
+    <item
+        android:id="@+id/opinion"
+        android:title="Opinion" />
+    <item
+        android:id="@+id/politics"
+        android:title="Politics" />
+    <item
+        android:id="@+id/realestate"
+        android:title="Realestate" />
+    <item
+        android:id="@+id/science"
+        android:title="science" />
+    <item
+        android:id="@+id/sports"
+        android:title="Sports" />
+    <item
+        android:id="@+id/sundayreview"
+        android:title="Sundayreview" />
+    <item
+        android:id="@+id/technology"
+        android:title="Technology" />
+    <item
+        android:id="@+id/theater"
+        android:title="Theater" />
+    <item
+        android:id="@+id/tmagazine"
+        android:title="Tmagazine" />
+    <item
+        android:id="@+id/travel"
+        android:title="Travel" />
+    <item
+        android:id="@+id/upshot"
+        android:title="Upshot" />
+    <item
+        android:id="@+id/world"
+        android:title="World" />
+
+</menu>

@@ -53,44 +53,33 @@ public class MainActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.setMessage("Loading. Please wait...");
 
-
         lv = (ListView) findViewById(R.id.listView1);
 
         mGridData = new ArrayList<>();
         mGridAdapter = new MainGridViewAdapter(MainActivity.this, R.layout.grid_item_layout, mGridData);
         lv.setAdapter(mGridAdapter);
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                String idd = mGridAdapter.getItem(position).getIDD();
-                String nam = mGridAdapter.getItem(position).getName();
-                String numb = mGridAdapter.getItem(position).getNumber();
-                String age = mGridAdapter.getItem(position).getAge();
+                String title = mGridAdapter.getItem(position).getTitle();
+                String imageurl = mGridAdapter.getItem(position).getImageURL();
+                String published_date = mGridAdapter.getItem(position).getPublished_date();
 
                 Bundle b = new Bundle();
 
-                b.putString("ab", idd);
-                b.putString("abab", nam);
-                b.putString("ababab",numb);
-                b.putString("abababab",age);
+                b.putString("ab", title);
+                b.putString("abab", imageurl);
+                b.putString("ababab", published_date);
 
                 intent.putExtras(b);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
 
         });
 
-        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            public boolean onItemLongClick(AdapterView<?> arg0, View v,
-                                           int index, long arg3) {
-
-                Toast.makeText(MainActivity.this, mGridAdapter.getItem(index).getName(), Toast.LENGTH_SHORT).show();
-
-                return true;
-            }
-        });
         //Start download
         new MoviesAsyncTask().execute();
 
@@ -120,10 +109,14 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < posts.length(); i++) {
                     JSONObject post = posts.optJSONObject(i);
                     item = new MainGridItem();
-                    item.setIDD(post.optString("id"));
-                    item.setName(post.getString("firstname"));
-                    item.setNumber(post.getString("lastname"));
-                    item.setAge(post.getString("age"));
+
+                    JSONArray imgs = post.getJSONArray("multimedia");
+                    JSONObject imgobj = imgs.getJSONObject(imgs.length() - 1);
+                    String img = imgobj.optString("url");
+
+                    item.setTitle(post.optString("title"));
+                    item.setImageURL(img);
+                    item.setPublished_date(post.getString("published_date"));
 
                     mGridData.add(item);
                 }
@@ -136,9 +129,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... strings) {
 
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-            final String baseURL = "http://192.168.1.107/phpinandroid/showStudents.php";
-            final String api_key = "api_key";
+            SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences_name", Context.MODE_PRIVATE);
+            String choose = sharedPreferences.getString("choose", "home");
+
+            setTitle(choose);
+
+            String baseURL = "http://api.nytimes.com/svc/topstories/v2/" + choose + ".json?api_key=b8e44f592a524d3db24fcb3636f874e5";
 
             Uri built = Uri.parse(baseURL).buildUpon().build();
 
@@ -218,15 +214,154 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_select_section, menu);
         return true;
+    }
+
+    public void ChangeStringforURL(String s) {
+
+        SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("sharedPreferences_name", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("choose", s);
+        editor.commit();
+
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int a = item.getItemId();
-        if (a == R.id.item1) {
+        int id = item.getItemId();
 
+        if (id == R.id.home1) {
+            ChangeStringforURL("home");
+            return true;
+        }
+
+        if (id == R.id.arts) {
+            ChangeStringforURL("arts");
+            return true;
+        }
+
+        if (id == R.id.automobiles) {
+            ChangeStringforURL("automobiles");
+            return true;
+        }
+
+        if (id == R.id.books) {
+            ChangeStringforURL("books");
+            return true;
+        }
+
+        if (id == R.id.business) {
+            ChangeStringforURL("business");
+            return true;
+        }
+
+        if (id == R.id.fashion) {
+            ChangeStringforURL("fashion");
+            return true;
+        }
+
+        if (id == R.id.food) {
+            ChangeStringforURL("food");
+            return true;
+        }
+
+        if (id == R.id.health) {
+            ChangeStringforURL("health");
+            return true;
+        }
+
+        if (id == R.id.insider) {
+            ChangeStringforURL("insider");
+            return true;
+        }
+
+        if (id == R.id.magazine) {
+            ChangeStringforURL("magazine");
+            return true;
+        }
+
+        if (id == R.id.movies) {
+            ChangeStringforURL("movies");
+            return true;
+        }
+
+        if (id == R.id.national) {
+            ChangeStringforURL("national");
+            return true;
+        }
+
+        if (id == R.id.nyregion) {
+            ChangeStringforURL("nyregion");
+            return true;
+        }
+
+        if (id == R.id.obituaries) {
+            ChangeStringforURL("obituaries");
+            return true;
+        }
+
+        if (id == R.id.opinion) {
+            ChangeStringforURL("opinion");
+            return true;
+        }
+
+        if (id == R.id.politics) {
+            ChangeStringforURL("politics");
+            return true;
+        }
+
+        if (id == R.id.realestate) {
+            ChangeStringforURL("realestate");
+            return true;
+        }
+
+        if (id == R.id.science) {
+            ChangeStringforURL("science");
+            return true;
+        }
+
+        if (id == R.id.sports) {
+            ChangeStringforURL("sports");
+            return true;
+        }
+
+        if (id == R.id.sundayreview) {
+            ChangeStringforURL("sundayreview");
+            return true;
+        }
+
+        if (id == R.id.technology) {
+            ChangeStringforURL("technology");
+            return true;
+        }
+
+        if (id == R.id.theater) {
+            ChangeStringforURL("theater");
+            return true;
+        }
+
+        if (id == R.id.tmagazine) {
+            ChangeStringforURL("tmagazine");
+            return true;
+        }
+
+        if (id == R.id.travel) {
+            ChangeStringforURL("travel");
+            return true;
+        }
+
+        if (id == R.id.upshot) {
+            ChangeStringforURL("upshot");
+            return true;
+        }
+
+        if (id == R.id.world) {
+            ChangeStringforURL("world");
             return true;
         }
 
