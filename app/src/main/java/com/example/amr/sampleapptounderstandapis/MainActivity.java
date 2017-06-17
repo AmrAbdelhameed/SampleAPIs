@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
                     item.setTitle(post.optString("title"));
                     item.setImageURL(img);
-                    item.setPublished_date(post.getString("published_date"));
+                    item.setPublished_date(post.getString("published_date").substring(0,10));
 
                     mGridData.add(item);
                 }

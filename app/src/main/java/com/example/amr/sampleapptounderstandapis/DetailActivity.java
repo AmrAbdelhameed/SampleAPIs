@@ -34,7 +34,7 @@ public class DetailActivity extends AppCompatActivity {
         tit.setText(title);
         setTitle(title);
 
-        date.setText(published_date);
+        date.setText("Published Date : " + published_date);
 
         Picasso.with(DetailActivity.this).load(imageurl).into(img);
 
@@ -56,6 +56,7 @@ public class DetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     public boolean onKeyDown(int keycode, KeyEvent event) {
         if (keycode == KeyEvent.KEYCODE_BACK) {
 

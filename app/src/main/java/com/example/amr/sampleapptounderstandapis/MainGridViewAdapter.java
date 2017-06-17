@@ -50,7 +50,7 @@ public class MainGridViewAdapter extends ArrayAdapter<MainGridItem> {
 
         MainGridItem item = mGridData.get(position);
         holder.text.setText(item.getTitle());
-        holder.text2.setText(item.getPublished_date());
+        holder.text2.setText("Published Date : "+item.getPublished_date());
         Picasso.with(mContext).load(item.getImageURL()).into(holder.imageView);
 
         return row;
